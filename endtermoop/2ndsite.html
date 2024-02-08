@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Preferences</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe0f0; /* soft pink */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+h2 {
+    text-align: center;
+    color: #d63384; /* Valentine's Day spirit */
+}
+
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type='text'],
+input[type='datetime-local'],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #d63384; /* Valentine's Day spirit */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+</style>
+<body>
+    <div class="container">
+        <h1>Your Preferences</h1>
+        <form id="preferencesForm" action="PreferencesServlet" method="post">
+            <label for="country">Country selection:</label>
+            <select id="country" name="country" required>
+                <!-- Option elements added here by JavaScript or server-side rendering -->
+            </select>
+        
+            <label for="city">Selecting a country's city:</label>
+            <select id="city" name="city" required>
+                <!-- Option elements added here by JavaScript or server-side rendering -->
+            </select>
+        
+            <label for="venue">A choice of venue:</label>
+            <select id="venue" name="venue" required>
+                <option value="restaurant">Restaurant</option>
+                <option value="park">Park</option>
+                <option value="circus">Circus</option>
+                <!-- More options can be added here -->
+            </select>
+        
+            <label for="datetime">Selecting the date and time of the meeting:</label>
+            <input type="datetime-local" id="datetime" name="datetime" required>
+        
+            <label for="dresscode">Meeting dress code:</label>
+            <input type="text" id="dresscode" name="dresscode" required>
+        
+            <input type="submit" value="Send Preferences">
+        </form>
+        
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('preferencesForm');
+
+    form.onsubmit = function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        var formData = new FormData(form);
+
+        fetch('PreferencesServlet', {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(text) {
+            console.log(text);
+            // You might want to do some action after the data is successfully submitted, like redirecting
+            // window.location.href = 'some-success-page.html';
+        })
+        .catch(function(error) {
+            console.error(error);
+        });
+    };
+});
+    </script>
+    <script src="script.js">
+    </script>
+</body>
+</html>

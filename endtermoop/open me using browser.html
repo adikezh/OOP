@@ -86,7 +86,11 @@
       
       caption.innerHTML = "Yoohoo";
       noBtn.style.display = "none";
-    });
+      
+      setTimeout(function() {
+        window.location.href = "2ndsite.html"; // Make sure the path is correct
+    }, 2000);
+});
 
     noBtn.addEventListener("click", function() {
       noClickCount++;
