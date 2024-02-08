@@ -1,0 +1,4 @@
+CREATE TABLE NoButtonClicks (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    count INT NOT NULL
+);

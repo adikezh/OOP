@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background-color: #ffb6c1;
+      --yes-button-color: #ff9999;
+      --no-button-color: #ffcccc; 
+      --button-hover-scale: 1.05;
+    }
+    body {
+      font-family: 'Handlee', cursive;
+      background-color: var(--background-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      padding: 0 20px;
+      max-width: 600px;
+    }
+    #gif img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    button {
+      font-family: 'Handlee', cursive;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .yes {
+      background-color: var(--yes-button-color);
+    }
+    .no {
+      background-color: var(--no-button-color);
+    }
+    .yes:hover, .no:hover {
+      transform: scale(var(--button-hover-scale));
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="caption">Will you be my Valentine?</h2>
+    <div id="gif">
+        <div class="tenor-gif-embed" data-postid="13031150" data-share-method="host" data-aspect-ratio="0.971154" data-width="100%"><a href="https://tenor.com/view/love-love-me-yes-no-valentine-valentines-day-gif-13031150">Love Love Me GIF</a> from <a href="https://tenor.com/search/love-gifs">Love GIFs</a></div>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <div class="button-container">
+      <button id="yesBtn" class="yes">Yes</button>
+      <button id="noBtn" class="no">No</button>
+    </div>
+  </div>
+  <script>
+    let noClickCount = 0;
+    const noBtnTexts = ["Maybe Yes?", "I will be a good boy(friend)", "Maybe in the future a good husband)", "Let's try it one last time", "Damnnn", "But I like you", "Like your soul", "Love your speech", "Damn that harsh", "Last chance", "No more chances!"];
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const caption = document.getElementById("caption");
+    
+    yesBtn.addEventListener("click", function() {
+      document.getElementById("gif").innerHTML = `<div class="tenor-gif-embed" data-postid="22614169" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/ositos-gif-22614169">Ositos GIF</a> from <a href="https://tenor.com/search/ositos-gifs">Ositos GIFs</a></div>`;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'https://tenor.com/embed.js';
+      scriptTag.async = true;
+      document.body.appendChild(scriptTag);
+      
+      caption.innerHTML = "Yoohoo";
+      noBtn.style.display = "none";
+    });
+
+    noBtn.addEventListener("click", function() {
+      noClickCount++;
+      if (noClickCount < noBtnTexts.length) {
+        caption.innerHTML = noBtnTexts[noClickCount];
+      } else {
+        noBtn.style.display = "none";
+      }
+      let currentFontSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+      let currentPadding = parseFloat(window.getComputedStyle(yesBtn).padding);
+      yesBtn.style.fontSize = `${currentFontSize * 1.2}px`;
+      yesBtn.style.padding = `${currentPadding * 1.2}px ${currentPadding * 1.4}px`;
+    });
+  // ...Your existing JavaScript code...
+
+  noBtn.addEventListener("click", function() {
+    noClickCount++;
+    if (noClickCount < noBtnTexts.length) {
+      caption.innerHTML = noBtnTexts[noClickCount];
+    } else {
+      noBtn.style.display = "none";
+    }
+    let currentFontSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+    let currentPadding = parseFloat(window.getComputedStyle(yesBtn).padding);
+    yesBtn.style.fontSize = `${currentFontSize * 1.2}px`;
+    yesBtn.style.padding = `${currentPadding * 1.2}px ${currentPadding * 1.4}px`;
+
+    // Send a request to the Java Servlet to increment the "no" button count
+    fetch('http://localhost:8080/incrementNoButtonCount', {
+      method: 'GET' // Or 'POST', depending on how your servlet is configured
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text(); // or response.json() if your server returns JSON
+    })
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  });
+</script>
+  </script>
+</body>
+</html>
