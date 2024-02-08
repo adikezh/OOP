@@ -67,12 +67,12 @@ button:hover {
         <form id="preferencesForm" action="PreferencesServlet" method="post">
             <label for="country">Country selection:</label>
             <select id="country" name="country" required>
-                <!-- Option elements added here by JavaScript or server-side rendering -->
+                <!-- Zhapok -->
             </select>
         
             <label for="city">Selecting a country's city:</label>
             <select id="city" name="city" required>
-                <!-- Option elements added here by JavaScript or server-side rendering -->
+                <!-- Murat Gay-->
             </select>
         
             <label for="venue">A choice of venue:</label>
@@ -94,24 +94,90 @@ button:hover {
         
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('preferencesForm');
+document.addEventListener('DOMContentLoaded', function() {
+    var countrySelect = document.getElementById('country');
+    var citySelect = document.getElementById('city');
+    var venueSelect = document.getElementById('venue');
 
-    form.onsubmit = function(e) {
-        e.preventDefault(); // Prevent the default form submission
+    //data for countries and cities
+    var countriesAndCities = {
+        'USA': ['New York', 'Los Angeles', 'Chicago'],
+        'Canada': ['Toronto', 'Vancouver', 'Montreal'],
+        'UK': ['London', 'Manchester', 'Birmingham'],
+        'Australia': ['Sydney', 'Melbourne', 'Perth'],
+        'India': ['Delhi', 'Mumbai', 'Bangalore'],
+        'China': ['Shanghai', 'Beijing', 'Guangzhou'],
+        'Japan': ['Tokyo', 'Osaka', 'Kyoto'],
+        'France': ['Paris', 'Marseille', 'Lyon'],
+        'Spain': ['Madrid', 'Barcelona', 'Valencia'],
+        'Germany': ['Berlin', 'Munich', 'Frankfurt'],
+        'Italy': ['Rome', 'Venice', 'Milan'],
+        'Mexico': ['Mexico City', 'Guadalajara', 'Cancun'],
+        'Korea': ['Seoul', 'Busan', 'Incheon'],
+        'Kazakhstan': ['Astana', 'Almaty', 'Nur-Sultan'],
+        'Kyrgyzstan': ['Bishkek', 'Naryn', 'Osh'],
+        'Uzbekistan': ['Tashkent', 'Samarkand', 'Fergana'],
+        'Tajikistan': ['Dushanbe', 'Bukhara', 'Samarkand'],
+        'Ukraine': ['Kiev', 'Kharkiv', 'Odessa'],
+        'Russia': ['Moscow', 'Saint Petersburg', 'Novosibirsk'],
+        'Denmark': ['Copenhagen', 'Aarhus', 'Odense'],
+        'England': ['London', 'Manchester', 'Birmingham'],
+        'Egypt': ['Cairo', 'Alexandria', 'Giza'],
+        'Greece': ['Athens', 'Thessaloniki', 'Patras'],
+        'Sweden': ['Stockholm', 'Gothenburg', 'Malmo'],
+        'Norway': ['Oslo', 'Trondheim', 'Bergen'],
+        'Switzerland': ['Zurich', 'Geneva', 'Basel'],
+        'Belgium': ['Brussels', 'Antwerp', 'Liege'],
+        'UAE': ['Abu Dhabi', 'Dubai', 'Sharjah'],
+        // Add more countries and cities here
+    };
 
-        var formData = new FormData(form);
+    // Populate the country dropdown
+    for (var country in countriesAndCities) {
+        var option = document.createElement('option');
+        option.value = country;
+        option.textContent = country;
+        countrySelect.appendChild(option);
+    }
 
-        fetch('PreferencesServlet', {
-            method: 'POST',
-            body: formData
-        })
-        .then(function(response) {
-            return response.text();
-        })
-        .then(function(text) {
-            console.log(text);
-            // You might want to do some action after the data is successfully submitted, like redirecting
+    // Update cities when a country is selected
+    countrySelect.onchange = function() {
+        citySelect.innerHTML = ''; // Clear cities dropdown
+        var selectedCountry = this.value;
+        var cities = countriesAndCities[selectedCountry];
+
+        cities.forEach(function(city) {
+            var option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+        });
+    };
+
+    // Populate venue dropdown with more options
+    var venues = ['Restaurant', 'Park', 'Circus', 'Museum', 'Theater', 'Gallery'];
+    venues.forEach(function(venue) {
+        var option = document.createElement('option');
+        option.value = venue.toLowerCase();
+        option.textContent = venue;
+        venueSelect.appendChild(option);
+    });
+        var form = document.getElementById('preferencesForm');
+
+        form.onsubmit = function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            var formData = new FormData(form);
+
+            fetch('PreferencesServlet', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(text) {
+                console.log(text);
             // window.location.href = 'some-success-page.html';
         })
         .catch(function(error) {

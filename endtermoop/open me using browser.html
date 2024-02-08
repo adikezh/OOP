@@ -86,9 +86,9 @@
       
       caption.innerHTML = "Yoohoo";
       noBtn.style.display = "none";
-      
+
       setTimeout(function() {
-        window.location.href = "2ndsite.html"; // Make sure the path is correct
+        window.location.href = "2ndsite.html";
     }, 2000);
 });
 
@@ -104,8 +104,6 @@
       yesBtn.style.fontSize = `${currentFontSize * 1.2}px`;
       yesBtn.style.padding = `${currentPadding * 1.2}px ${currentPadding * 1.4}px`;
     });
-  // ...Your existing JavaScript code...
-
   noBtn.addEventListener("click", function() {
     noClickCount++;
     if (noClickCount < noBtnTexts.length) {
@@ -120,13 +118,13 @@
 
     // Send a request to the Java Servlet to increment the "no" button count
     fetch('http://localhost:8080/incrementNoButtonCount', {
-      method: 'GET' // Or 'POST', depending on how your servlet is configured
+      method: 'GET' // Or 'POST
     })
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response.text(); // or response.json() if your server returns JSON
+      return response.text(); // or response.json() if server returns JSON
     })
     .then(data => {
       console.log('Success:', data);

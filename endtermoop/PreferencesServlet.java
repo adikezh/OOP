@@ -36,6 +36,5 @@ public class PreferencesServlet extends HttpServlet {
         } catch (SQLException e) {
             // Handle SQL exceptions
         }
-        // ... rest of exception handling
     }
 }
