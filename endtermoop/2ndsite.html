@@ -164,12 +164,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.text();
             })
             .then(function(text) {
-                console.log(text);
-                window.location.href = '3rdsite.html';
-        })
-        .catch(function(error) {
-            console.error(error);
-        });
+                if (text === 'Success') {
+                    window.location.href = '3rdsite.html';
+                } else {
+                    console.error('Error:', text);
+                }
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
     };
 });
     </script>
