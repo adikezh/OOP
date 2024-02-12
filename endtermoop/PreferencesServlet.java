@@ -33,6 +33,10 @@ public class PreferencesServlet extends HttpServlet {
             pstmt.executeUpdate();
             
             // Redirect or forward to a success page
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("Success");
+            
         } catch (SQLException e) {
             // Handle SQL exceptions
         }
