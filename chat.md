@@ -12,5 +12,6 @@
 
 
 # Temirlan
-
+ ### feb 12
+ я гей
 # Zhanarys
