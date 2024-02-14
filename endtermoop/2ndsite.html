@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Your Preferences</title>
     <link rel="stylesheet" href="styles.css">
-</head>
 <style>
     body {
     font-family: 'Arial', sans-serif;
@@ -61,6 +60,7 @@ button:hover {
     opacity: 0.9;
 }
 </style>
+</head>
 <body>
     <div class="container">
         <h1>Your Preferences</h1>
@@ -90,13 +90,14 @@ button:hover {
             <input type="text" id="dresscode" name="dresscode" required>
         
             <input type="submit" value="Send Preferences">
-        </form   
+        </form>
     </div>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     var countrySelect = document.getElementById('country');
     var citySelect = document.getElementById('city');
     var venueSelect = document.getElementById('venue');
+    var form = document.getElementById('preferencesForm');
 
     //data for countries and cities
     var countriesAndCities = {
@@ -148,28 +149,33 @@ document.addEventListener('DOMContentLoaded', function() {
         option.textContent = venue;
         venueSelect.appendChild(option);
     });
-        var form = document.getElementById('preferencesForm');
-            form.onsubmit = function(e) {
-                e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('country');
+    var form = document.getElementById('city');
+    var form = document.getElementById('venue');
+    var form = document.getElementById('preferencesForm');
 
-                var formData = new FormData(form);
+    form.addEventListener('sumbit', function(e) {
+        e.preventDefault();
 
-                fetch('PreferencesServlet', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(function(response) {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    // Redirect to 3rdsite.html after the form is successfully submitted
-                    window.location.href = '3rdsite.html';
-                })
-                .catch(function(error) {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-            };
+        var formData = new FormData(this);
+
+        fetch('PreferencesServlet', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            window.location.href = '3rdsite.html';
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+    });
+});
+});
     </script>
-</body>
-</html>
+    </body>
+    </html>

@@ -37,12 +37,14 @@ public class PreferencesServlet extends HttpServlet {
                 // Redirect to the "3rdsite.html" page
                 response.sendRedirect("3rdsite.html");
             } else {
-                // Handle the case where no rows were inserted
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No rows inserted.");
             }
+            response.sendRedirect("3rdsite.html");
     
 } catch (SQLException e) {
     // Handle SQL exceptions
     // Optionally, redirect to an error page or return an error message
-}
+    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred.");
+                }
             }
         }
