@@ -64,7 +64,7 @@ button:hover {
 <body>
     <div class="container">
         <h1>Your Preferences</h1>
-        <form id="preferencesForm" action="PreferencesServlet" method="post">
+        <form id="preferencesForm" method="post">
             <label for="country">Country selection:</label>
             <select id="country" name="country" required>
                 <!-- Zhapok -->
@@ -90,8 +90,7 @@ button:hover {
             <input type="text" id="dresscode" name="dresscode" required>
         
             <input type="submit" value="Send Preferences">
-        </form>
-        
+        </form   
     </div>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -150,33 +149,27 @@ document.addEventListener('DOMContentLoaded', function() {
         venueSelect.appendChild(option);
     });
         var form = document.getElementById('preferencesForm');
+            form.onsubmit = function(e) {
+                e.preventDefault();
 
-        form.onsubmit = function(e) {
-            e.preventDefault(); // Prevent the default form submission
+                var formData = new FormData(form);
 
-            var formData = new FormData(form);
-
-            fetch('PreferencesServlet', {
-                method: 'POST',
-                body: formData
-            })
-            .then(function(response) {
-                return response.text();
-            })
-            .then(function(text) {
-                if (text === 'Success') {
+                fetch('PreferencesServlet', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    // Redirect to 3rdsite.html after the form is successfully submitted
                     window.location.href = '3rdsite.html';
-                } else {
-                    console.error('Error:', text);
-                }
-            })
-            .catch(function(error) {
-                console.error(error);
-            });
-    };
-});
-    </script>
-    <script src="script.js">
+                })
+                .catch(function(error) {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+            };
+        });
     </script>
 </body>
 </html>

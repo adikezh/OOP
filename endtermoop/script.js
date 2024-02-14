@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var form = document.getElementById('preferencesForm');
 
     form.onsubmit = function(e) {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
 
         var formData = new FormData(form);
 
@@ -11,11 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
             body: formData
         })
         .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             return response.text();
         })
         .then(function(text) {
             console.log(text);
-            // window.location.href = 'some-success-page.html';
+            window.location.href = '3rdsite.html';
         })
         .catch(function(error) {
             console.error(error);
