@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Preferences</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe0f0; /* soft pink */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+h2 {
+    text-align: center;
+    color: #d63384; /* Valentine's Day spirit */
+}
+
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type='text'],
+input[type='datetime-local'],
+select {
+    width: 99%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #d63384; /* Valentine's Day spirit */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+</style>
+<body>
+    <div class="container">
+        <h1>Your Preferences</h1>
+        <form id="preferencesForm" method="post">
+            <label for="country">Country selection:</label>
+            <select id="country" name="country" required>
+                <!-- Zhapok -->
+            </select>
+        
+            <label for="city">Selecting a country's city:</label>
+            <select id="city" name="city" required>
+                <!-- Murat Gay-->
+            </select>
+        
+            <label for="venue">A choice of venue:</label>
+            <select id="venue" name="venue" required>
+                <option value="restaurant">Restaurant</option>
+                <option value="park">Park</option>
+                <option value="circus">Circus</option>
+                <!-- More options can be added here -->
+            </select>
+        
+            <label for="datetime">Selecting the date and time of the meeting:</label>
+            <input type="datetime-local" id="datetime" name="datetime" required>
+        
+            <label for="dresscode">Meeting dress code:</label>
+            <input type="text" id="dresscode" name="dresscode" required>
+        
+            <input type="submit" value="Send Preferences">
+        </form   
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var countrySelect = document.getElementById('country');
+    var citySelect = document.getElementById('city');
+    var venueSelect = document.getElementById('venue');
+
+    //data for countries and cities
+    var countriesAndCities = {
+        'USA': ['New York', 'Los Angeles', 'Chicago'],
+        'UK': ['London', 'Manchester', 'Bristol'],
+        'Canada': ['Toronto', 'Vancouver', 'Montreal'],
+        'Australia': ['Sydney', 'Melbourne', 'Brisbane'],
+        'India': ['Mumbai', 'Delhi', 'Ahmedabad'],
+        'China': ['Beijing', 'Shanghai', 'Guangzhou'],
+        'Japan': ['Tokyo', 'Osaka', 'Nagoya'],
+        'France': ['Paris', 'Lyon', 'Marseille'],
+        'Germany': ['Berlin', 'Munich', 'Frankfurt'],
+        'Italy': ['Rome', 'Venice', 'Milan'],
+        'Spain': ['Madrid', 'Barcelona', 'Sevilla'],
+        'Mexico': ['Mexico City', 'Guadalajara', 'Cancun'],
+        'Brazil': ['São Paulo', 'Rio de Janeiro', 'Brasília'],
+        'Australia': ['Sydney', 'Melbourne', 'Brisbane'],
+        'Kazakhstan': ['Astana', 'Almaty', 'Shymkent'],
+        // Add more countries and cities here
+    };
+
+    // Populate the country dropdown
+    for (var country in countriesAndCities) {
+        var option = document.createElement('option');
+        option.value = country;
+        option.textContent = country;
+        countrySelect.appendChild(option);
+    }
+
+    // Update cities when a country is selected
+    countrySelect.onchange = function() {
+        citySelect.innerHTML = ''; // Clear cities dropdown
+        var selectedCountry = this.value;
+        var cities = countriesAndCities[selectedCountry];
+
+        cities.forEach(function(city) {
+            var option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            citySelect.appendChild(option);
+        });
+    };
+
+    // Populate venue dropdown with more options
+    var venues = ['Restaurant', 'Park', 'Circus', 'Museum', 'Theater', 'Gallery'];
+    venues.forEach(function(venue) {
+        var option = document.createElement('option');
+        option.value = venue.toLowerCase();
+        option.textContent = venue;
+        venueSelect.appendChild(option);
+    });
+        var form = document.getElementById('preferencesForm');
+            form.onsubmit = function(e) {
+                e.preventDefault();
+
+                var formData = new FormData(form);
+
+                fetch('PreferencesServlet', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    // Redirect to 3rdsite.html after the form is successfully submitted
+                    window.location.href = '3rdsite.html';
+                })
+                .catch(function(error) {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+            };
+        });
+    </script>
+</body>
+</html>
