@@ -10,8 +10,8 @@ public class NoButtonServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // JDBC driver name and database URL
-        final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-        final String DB_URL="postgresql://localhost:5432/testdbw";
+        final String JDBC_DRIVER = "org.postgresql.Driver";  
+        final String DB_URL="jbdc:postgresql://localhost:8080/testdbw";
         // ALI PIDORAS
 
         // Database credentials

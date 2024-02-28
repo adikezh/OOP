@@ -17,7 +17,7 @@ public class PreferencesServlet extends HttpServlet {
         // Database connection and SQL insert statements go here
         // You would use JDBC to connect to your database named "base" and insert the data
         String insertSQL = "INSERT INTO preferences (country, city, venue, datetime, dresscode) VALUES (?, ?, ?, ?, ?)";
-        String dbURL = "postgresql://localhost:5432/testdbw";
+        String dbURL = "jdbc:postgresql://localhost:8080/testdbw";
         String user = "postgres";
         String pass = "alwk";
 

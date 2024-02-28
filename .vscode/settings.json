@@ -3,11 +3,11 @@
         {
             "previewLimit": 50,
             "server": "localhost",
-            "port": 5432,
+            "port": 8080,
             "driver": "PostgreSQL",
             "name": "postgres",
-            "username": "postgres",
             "database": "testdbw",
+            "username": "postgres",
             "password": "alwk"
         }
     ]

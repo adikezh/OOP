@@ -117,8 +117,8 @@
     yesBtn.style.padding = `${currentPadding * 1.2}px ${currentPadding * 1.4}px`;
 
     // Send a request to the Java Servlet to increment the "no" button count
-    fetch('http://localhost:8080/incrementNoButtonCount', {
-      method: 'GET' // Or 'POST
+    fetch('http://localhost:8080/NoButtonServlet', {
+      method: 'POST' // Or 'POST
     })
     .then(response => {
       if (!response.ok) {
