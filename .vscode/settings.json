@@ -1,5 +1,14 @@
 {
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "postgres",
+            "username": "postgres",
+            "database": "testdbw",
+            "password": "alwk"
+        }
     ]
 }

@@ -1,4 +1,3 @@
-package endtermoop;
 // Import statements go here
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,9 +17,9 @@ public class PreferencesServlet extends HttpServlet {
         // Database connection and SQL insert statements go here
         // You would use JDBC to connect to your database named "base" and insert the data
         String insertSQL = "INSERT INTO preferences (country, city, venue, datetime, dresscode) VALUES (?, ?, ?, ?, ?)";
-        String dbURL = "jdbc:mysql://localhost/yourDatabaseName";
-        String user = "username";
-        String pass = "password";
+        String dbURL = "postgresql://localhost:5432/testdbw";
+        String user = "postgres";
+        String pass = "alwk";
 
         // Use PreparedStatement for security against SQL injection
         try (Connection conn = DriverManager.getConnection(dbURL, user, pass);
@@ -37,7 +36,8 @@ public class PreferencesServlet extends HttpServlet {
                 // Redirect to the "3rdsite.html" page
                 response.sendRedirect("3rdsite.html");
             } else {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No rows inserted.");
+                response.sendRedirect("3rdsite.html");
+   
             }
             response.sendRedirect("3rdsite.html");
     

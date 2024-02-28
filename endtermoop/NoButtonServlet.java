@@ -11,14 +11,16 @@ public class NoButtonServlet extends HttpServlet {
         throws ServletException, IOException {
         // JDBC driver name and database URL
         final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-        final String DB_URL="jdbc:mysql://localhost/yourDatabaseName";
+        final String DB_URL="postgresql://localhost:5432/testdbw";
+        // ALI PIDORAS
 
         // Database credentials
-        final String USER = "username";
-        final String PASS = "password";
+        final String USER = "postgres";
+        final String PASS = "alwk";
 
         // Set response content type
         response.setContentType("text/html");
+        @SuppressWarnings("unused")
         PrintWriter out = response.getWriter();
         
         Connection conn = null;
