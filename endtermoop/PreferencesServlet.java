@@ -41,10 +41,11 @@ public class PreferencesServlet extends HttpServlet {
             }
             response.sendRedirect("3rdsite.html");
     
-} catch (SQLException e) {
+    }catch (SQLException e) {
     // Handle SQL exceptions
     // Optionally, redirect to an error page or return an error message
     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error occurred.");
                 }
             }
+            
         }
